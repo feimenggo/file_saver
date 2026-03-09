@@ -117,6 +117,9 @@ class FileUtils(var context: Context) {
                     contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
                 } else if ("audio" == type) {
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                } else {
+                    // 对于其他媒体类型（如文档），尝试直接查询，否则contentUri为null
+                    return copyFileToInternalStorage(uri, "userfiles")
                 }
                 selection = "_id=?"
                 selectionArgs = arrayOf(split[1])
